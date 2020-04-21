@@ -21,7 +21,7 @@ limitations under the License.
 #ifndef TENSORFLOW_LITE_MICRO_EXAMPLES_HELLO_WORLD_COSINE_MODEL_DATA_H_
 #define TENSORFLOW_LITE_MICRO_EXAMPLES_HELLO_WORLD_COSINE_MODEL_DATA_H_
 
-extern const unsigned char cosine_model_quantized_tflite[];
+extern const unsigned char g_cosine_model_data[];
 extern const int g_cosine_model_data_len;
 
 #endif  // TENSORFLOW_LITE_MICRO_EXAMPLES_HELLO_WORLD_COSINE_MODEL_DATA_H_
