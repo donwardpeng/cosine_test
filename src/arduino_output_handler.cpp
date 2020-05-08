@@ -18,8 +18,10 @@ limitations under the License.
 #include "Arduino.h"
 #include "constants.h"
 
-// The pin of the Arduino's built-in LED
 int led = LED_BUILTIN;
+int red = LEDR;
+int blue = LEDB;
+int green = LEDG;
 
 // Track whether the function has run at least once
 bool initialized = false;
@@ -31,17 +33,27 @@ void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value,
   if (!initialized) {
     // Set the LED pin to output
     pinMode(led, OUTPUT);
+    pinMode(red, OUTPUT);
+    pinMode(blue, OUTPUT);
+    pinMode(green, OUTPUT);
     initialized = true;
   }
 
   // Calculate the brightness of the LED such that y=-1 is fully off
   // and y=1 is fully on. The LED's brightness can range from 0-255.
   int brightness = (int)(127.5f * (y_value + 1));
+  int redBrightness = (int)(127.5f * (y_value + 1));
+  int blueBrightness = (int)(-127.5f * (y_value - 1));
+  int greenBrightness = (int)(127.5f * (y_value + 1));
+
 
   // Set the brightness of the LED. If the specified pin does not support PWM,
   // this will result in the LED being on when y > 127, off otherwise.
   analogWrite(led, brightness);
+  analogWrite(red,redBrightness);
+  analogWrite(blue,blueBrightness);
+  analogWrite(green,255);
 
   // Log the current brightness value for display in the Arduino plotter
-  error_reporter->Report("%d\n", brightness);
+  error_reporter->Report("Brightness Value = %d\n", brightness);
 }
